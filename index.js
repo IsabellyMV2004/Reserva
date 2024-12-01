@@ -36,9 +36,6 @@ app.use("/produtos",rotaProduto);
 app.use("/categorias",rotaCategoria);
 
 
-import dotenv from 'dotenv';
-dotenv.config();
-
 console.log("IP_BANCO_DE_DADOS:", process.env.IP_BANCO_DE_DADOS);
 console.log("PORTA_BANCO_DE_DADOS:", process.env.PORTA_BANCO_DE_DADOS);
 console.log("BASE_DE_DADOS:", process.env.BASE_DE_DADOS);
