@@ -11,7 +11,7 @@ export default class CategoriaDAO{
         try{
             const conexao = await conectar();
             const sql = `
-                CREATE TABLE IF NOT EXISTS categoria(
+                CREATE TABLE IF NOT EXISTS categoriaC(
                     codigo INT NOT NULL AUTO_INCREMENT,
                     descricao VARCHAR(50) NOT NULL,
                     CONSTRAINT pk_categoria PRIMARY KEY(codigo)
@@ -29,7 +29,7 @@ export default class CategoriaDAO{
     async gravar(categoria){
         if (categoria instanceof Categoria){
             const conexao = await conectar();
-            const sql = "INSERT INTO categoria(descricao) VALUES (?)";
+            const sql = "INSERT INTO categoriaC(descricao) VALUES (?)";
             const parametros = [categoria.descricao];
             const resultado = await conexao.execute(sql,parametros);
             categoria.codigo = resultado[0].insertId;
@@ -40,7 +40,7 @@ export default class CategoriaDAO{
     async editar(categoria){
         if (categoria instanceof Categoria){
             const conexao = await conectar();
-            const sql = "UPDATE categoria SET descricao = ? WHERE codigo = ?";
+            const sql = "UPDATE categoriaC SET descricao = ? WHERE codigo = ?";
             const parametros = [categoria.descricao, categoria.codigo];
             await conexao.execute(sql,parametros);
             await conexao.release();
@@ -50,7 +50,7 @@ export default class CategoriaDAO{
     async excluir(categoria){
         if (categoria instanceof Categoria){
             const conexao = await conectar();
-            const sql = "DELETE FROM categoria WHERE codigo = ?";
+            const sql = "DELETE FROM categoriaC WHERE codigo = ?";
             const parametros = [categoria.codigo];
             await conexao.execute(sql,parametros);
             await conexao.release();
@@ -61,11 +61,11 @@ export default class CategoriaDAO{
         let sql = "";
         let parametros = [];
         if (isNaN(parseInt(termo))) {
-            sql = "SELECT * FROM categoria WHERE descricao LIKE ? ORDER BY descricao";
+            sql = "SELECT * FROM categoriaC WHERE descricao LIKE ? ORDER BY descricao";
             parametros.push("%"+termo+"%");
         }
         else{
-            sql = "SELECT * FROM categoria WHERE codigo = ? ORDER BY descricao";
+            sql = "SELECT * FROM categoriaC WHERE codigo = ? ORDER BY descricao";
             parametros.push(termo);
         }
         const conexao = await conectar();
