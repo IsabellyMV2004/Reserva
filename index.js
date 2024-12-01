@@ -35,12 +35,12 @@ app.use(express.static('./publico'));
 app.use("/produtos",rotaProduto);
 app.use("/categorias",rotaCategoria);
 
-
+/*
 console.log("IP_BANCO_DE_DADOS:", process.env.IP_BANCO_DE_DADOS);
 console.log("PORTA_BANCO_DE_DADOS:", process.env.PORTA_BANCO_DE_DADOS);
 console.log("BASE_DE_DADOS:", process.env.BASE_DE_DADOS);
 console.log("BD_USUARIO:", process.env.BD_USUARIO);
-console.log("BD_SENHA:", process.env.BD_SENHA);
+console.log("BD_SENHA:", process.env.BD_SENHA);*/
 
 // O restante do código do servidor (express, rotas, etc.)
 
