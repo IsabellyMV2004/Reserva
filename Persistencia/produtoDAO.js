@@ -13,7 +13,7 @@ export default class ProdutoDAO {
         {
             const conexao = await conectar(); //retorna uma conexão
             const sql = `
-            CREATE TABLE IF NOT EXISTS produtoP(
+            CREATE TABLE IF NOT EXISTS produto(
                 prod_codigo INT NOT NULL AUTO_INCREMENT,
                 prod_descricao VARCHAR(200) NOT NULL,
                 prod_precoCusto DECIMAL(10,2) NOT NULL,
@@ -37,7 +37,7 @@ export default class ProdutoDAO {
     async incluir(produto) {
         if (produto instanceof Produto) {
             const conexao = await conectar();
-            const sql = `INSERT INTO produtoP(prod_descricao,prod_precoCusto,prod_precoVenda,prod_qtdEstoque,prod_urlImagem,prod_dataValidade, fk_codigo_cat)
+            const sql = `INSERT INTO produto(prod_descricao,prod_precoCusto,prod_precoVenda,prod_qtdEstoque,prod_urlImagem,prod_dataValidade, fk_codigo_cat)
                 values(?,?,?,?,?,?)
             `;
             let parametros = [
@@ -57,7 +57,7 @@ export default class ProdutoDAO {
     async alterar(produto) {
         if (produto instanceof Produto) {
             const conexao = await conectar();
-            const sql = `UPDATE produtoP SET prod_descricao=?,prod_precoCusto=?,prod_precoVenda=?,prod_qtdEstoque=?,prod_urlImagem=?,prod_dataValidade=str_to_date(?,'%d/%m/%Y'), fk_codigo_cat = ?
+            const sql = `UPDATE produto SET prod_descricao=?,prod_precoCusto=?,prod_precoVenda=?,prod_qtdEstoque=?,prod_urlImagem=?,prod_dataValidade=str_to_date(?,'%d/%m/%Y'), fk_codigo_cat = ?
                 WHERE prod_codigo = ?
             `;
             let parametros = [
@@ -80,14 +80,14 @@ export default class ProdutoDAO {
         let sql = "";
         let parametros = [];
         if (isNaN(parseInt(termo))) {
-            sql = `SELECT * FROM produtoP p
-                   INNER JOIN categoriaC c ON p.fk_codigo_cat = c.codigo
+            sql = `SELECT * FROM produto p
+                   INNER JOIN categoria c ON p.fk_codigo_cat = c.codigo
                    WHERE prod_descricao LIKE ?`;
             parametros = ['%' + termo + '%'];
         }
         else {
-            sql = `SELECT * FROM produtoP p
-                   INNER JOIN categoriaC c ON p.fk_codigo_cat = c.codigo 
+            sql = `SELECT * FROM produto p
+                   INNER JOIN categoria c ON p.fk_codigo_cat = c.codigo 
                    WHERE prod_codigo = ?`
             parametros = [termo];
         }
@@ -113,7 +113,7 @@ export default class ProdutoDAO {
     async excluir(produto) {
         if (produto instanceof Produto) {
             const conexao = await conectar();
-            const sql = `DELETE FROM produtoP WHERE prod_codigo = ?`;
+            const sql = `DELETE FROM produto WHERE prod_codigo = ?`;
             let parametros = [
                 produto.codigo
             ]; //dados do produto
