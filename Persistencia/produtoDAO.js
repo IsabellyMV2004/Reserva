@@ -23,7 +23,7 @@ export default class ProdutoDAO {
                 prod_dataValidade DATE NOT NULL,
                 fk_codigo_cat INT NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                CONSTRAINT pk_produto PRIMARY KEY(prod_codigo),
+                CONSTRAINT pk_produto PRIMARY KEY(prod_codigo)
             )
         `;
             await conexao.execute(sql);
